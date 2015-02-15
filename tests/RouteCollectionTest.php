@@ -151,4 +151,18 @@ class RouteCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('League\Route\Dispatcher', $router->getDispatcher());
         $this->assertInstanceOf('FastRoute\Dispatcher\GroupCountBased', $router->getDispatcher());
     }
+    
+    /**
+     * Asserts named routes are put in namedRoute array
+     * 
+     * @return void
+     */
+    public function testNamedRoutesAreProperlyHandled() {
+        $router = new RouteCollection;
+        $router->addRoute('GET', 'noname', function() {});
+        $router->addRoute('GET', '@name/named-route', function() {});
+        $router->addRoute('GET', '@another-name/another-named-route', function() {});
+        
+        $this->assertCount(2, $router->getNamedRoutes());
+    }
 }
