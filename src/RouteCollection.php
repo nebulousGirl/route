@@ -42,7 +42,7 @@ class RouteCollection extends RouteCollector
      */
     public function __construct(
         ContainerInterface $container = null,
-        IRouteParser        $parser    = null,
+        IRouteParser        $parser = null,
         DataGenerator      $generator = null
     ) {
         $this->container = ($container instanceof ContainerInterface) ? $container : new Container;
@@ -110,10 +110,10 @@ class RouteCollection extends RouteCollector
     
     /**
      * Returns the array of registered named routes (starting with @)
-     * 
+     *
      * @return array
      */
-    public function getNamedRoutes() 
+    public function getNamedRoutes()
     {
         return $this->namedRoutes;
     }

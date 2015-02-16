@@ -154,14 +154,18 @@ class RouteCollectionTest extends \PHPUnit_Framework_TestCase
     
     /**
      * Asserts named routes are put in namedRoute array
-     * 
+     *
      * @return void
      */
-    public function testNamedRoutesAreProperlyHandled() {
+    public function testNamedRoutesAreProperlyHandled()
+    {
         $router = new RouteCollection;
-        $router->addRoute('GET', 'noname', function() {});
-        $router->addRoute('GET', '@name/named-route', function() {});
-        $router->addRoute('GET', '@another-name/another-named-route', function() {});
+        $router->addRoute('GET', 'noname', function() {
+        });
+        $router->addRoute('GET', '@name/named-route', function() {
+        });
+        $router->addRoute('GET', '@another-name/another-named-route', function() {
+        });
         
         $this->assertCount(2, $router->getNamedRoutes());
     }

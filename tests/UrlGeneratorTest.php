@@ -11,9 +11,11 @@ class UrlGeneratorTest extends \PHPUnit_Framework_TestCase
     /**
      * Asserts that the @ sign is correctly added when missing
      */
-    public function testMissingAtSign() {
+    public function testMissingAtSign()
+    {
         $routes = new RouteCollection;
-        $routes->addRoute('GET', '@namedRoute/test', function() {});
+        $routes->addRoute('GET', '@namedRoute/test', function() {
+        });
         $generator = new UrlGenerator($routes);
         
         $this->assertEquals($generator->generate('@namedRoute'), $generator->generate('namedRoute'));
@@ -22,10 +24,13 @@ class UrlGeneratorTest extends \PHPUnit_Framework_TestCase
     /**
      * Asserts that named routes are correctly generated
      */
-    public function testNamedRouteWithoutParams() {
+    public function testNamedRouteWithoutParams()
+    {
         $routes = new RouteCollection;
-        $routes->addRoute('GET', '@namedRoute/test', function() {});
-        $routes->addRoute('GET', '@namedSlashedRoute/test/', function() {});
+        $routes->addRoute('GET', '@namedRoute/test', function() {
+        });
+        $routes->addRoute('GET', '@namedSlashedRoute/test/', function() {
+        });
         $generator = new UrlGenerator($routes);
         
         $this->assertEquals('test', $generator->generate('@namedRoute'));
@@ -35,9 +40,11 @@ class UrlGeneratorTest extends \PHPUnit_Framework_TestCase
     /**
      * Asserts that the base url work correctly
      */
-    public function testSetBaseUrl() {
+    public function testSetBaseUrl()
+    {
         $routes = new RouteCollection;
-        $routes->addRoute('GET', '@namedRoute/test', function() {});
+        $routes->addRoute('GET', '@namedRoute/test', function() {
+        });
         $generator = new UrlGenerator($routes);
         $generator->setBaseUrl('http://myfakedomain.com/');
         
@@ -50,13 +57,19 @@ class UrlGeneratorTest extends \PHPUnit_Framework_TestCase
     /**
      * Asserts that named routes with parameters are correctly generated
      */
-    public function testSimpleParameters() {
+    public function testSimpleParameters()
+    {
         $routes = new RouteCollection;
-        $routes->addRoute('GET', '@numberRoute/test/{id:number}', function() {});
-        $routes->addRoute('GET', '@wordRoute/test/{name:word}', function() {});
-        $routes->addRoute('GET', '@urlRoute/test/{url:alphanum_dash}', function() {});
-        $routes->addRoute('GET', '@paramRoute/test/{param}', function() {});
-        $routes->addRoute('GET', '@manyRoute/test/{id:number}/{name:word}', function() {});
+        $routes->addRoute('GET', '@numberRoute/test/{id:number}', function() {
+        });
+        $routes->addRoute('GET', '@wordRoute/test/{name:word}', function() {
+        });
+        $routes->addRoute('GET', '@urlRoute/test/{url:alphanum_dash}', function() {
+        });
+        $routes->addRoute('GET', '@paramRoute/test/{param}', function() {
+        });
+        $routes->addRoute('GET', '@manyRoute/test/{id:number}/{name:word}', function() {
+        });
         $generator = new UrlGenerator($routes);
         
         $this->assertEquals('test/1', $generator->generate('@numberRoute', array('id' => 1)));
@@ -68,12 +81,14 @@ class UrlGeneratorTest extends \PHPUnit_Framework_TestCase
     
     /**
      * Asserts that an exception is thrown when a parameter is missing
-     * 
+     *
      * @expectedException InvalidArgumentException
      */
-    public function testRouteWithMissingParameter() {
+    public function testRouteWithMissingParameter()
+    {
         $routes = new RouteCollection;
-        $routes->addRoute('GET', '@namedRoute/test/{id:number}', function() {});
+        $routes->addRoute('GET', '@namedRoute/test/{id:number}', function() {
+        });
         $generator = new UrlGenerator($routes);
         
         $generator->generate('@namedRoute');
@@ -81,16 +96,17 @@ class UrlGeneratorTest extends \PHPUnit_Framework_TestCase
     
     /**
      * Asserts that an exception is thrown when a parameter is invalid
-     * 
+     *
      * @expectedException InvalidArgumentException
      */
-    public function testRouteWithInvalidParameter() {
+    public function testRouteWithInvalidParameter()
+    {
         $routes = new RouteCollection;
-        $routes->addRoute('GET', '@namedRoute/test/{id:number}', function() {});
+        $routes->addRoute('GET', '@namedRoute/test/{id:number}', function() {
+        });
         $generator = new UrlGenerator($routes);
         
         $generator->generate('@namedRoute', array('id' => 'InvalidID'));
         
     }
-    
 }

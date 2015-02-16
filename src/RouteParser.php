@@ -10,7 +10,7 @@ use FastRoute\RouteParser\Std;
  *
  * "/user/{name}/{id:[0-9]+}"
  */
-class RouteParser extends Std implements IRouteParser 
+class RouteParser extends Std implements IRouteParser
 {
     /**
      * Regex to find the route alias
@@ -19,11 +19,12 @@ class RouteParser extends Std implements IRouteParser
     
     /**
      * Parses the string into an array of segments
-     * 
+     *
      * @param string $route
      * @return array
      */
-    public function parse($route) {
+    public function parse($route)
+    {
         
         //Remove possible name in route
         $route = preg_replace(self::ALIAS_REGEX, '', $route);

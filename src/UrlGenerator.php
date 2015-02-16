@@ -16,14 +16,14 @@ class UrlGenerator
 
     /**
      * Route collection to use
-     * 
-     * @var RouteCollection 
+     *
+     * @var RouteCollection
      */
     protected $routes;
-    
+
     /**
      * Route Parser to use
-     * @var RouteParser 
+     * @var RouteParser
      */
     protected $parser;
 
@@ -52,7 +52,7 @@ class UrlGenerator
 
     /**
      * Generates an url using a registered route
-     * 
+     *
      * @param string $name Route Alias
      * @param array $params
      * @return string
@@ -78,9 +78,9 @@ class UrlGenerator
         foreach ($parsed_route as $part) {
             if (is_string($part)) {
                 $url .= $part;
-            } else if (is_array($part) && isset($params[$part[0]]) && preg_match('#' . $part[1] . '#', $params[$part[0]])) {
+            } elseif (is_array($part) && isset($params[$part[0]]) && preg_match('#' . $part[1] . '#', $params[$part[0]])) {
                 $url .= $params[$part[0]];
-            } else if (isset($params[$part[0]])) {
+            } elseif (isset($params[$part[0]])) {
                 throw new \InvalidArgumentException(sprintf('Invalid value %s for parameter %s for route %s. Does not match the pattern: %s', $params[$part[0]], $part[0], $alias, $part[1]));
             } else {
                 throw new \InvalidArgumentException(sprintf('Missing parameter %s for route %s.', $part[0], $alias));
@@ -89,5 +89,4 @@ class UrlGenerator
 
         return ($include_base && !empty($this->baseUrl) ? rtrim($this->baseUrl, '/') . '/' : '' ) . ltrim($url, '/');
     }
-
 }
